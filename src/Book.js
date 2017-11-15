@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import titleCase from 'title-case'
+import ReactStars from 'react-stars'
 
 class Book extends Component {
 
@@ -18,7 +19,10 @@ class Book extends Component {
       <li key={book.id}>
         <div className="book">
           <div className="book-top">
-            { book.shelf && book.shelf !== 'none' && isSearch ?  <div className="bookshelf-label">{titleCase(book.shelf)}</div> : '' }
+            {/* show or hide book shelf label */}
+            { book.shelf && book.shelf !== 'none' && isSearch ?
+              <div className="bookshelf-label">{titleCase(book.shelf)}</div> : ''
+            }
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
             <div className="book-shelf-changer">
               <select value={book.shelf ? book.shelf : 'none'} onChange={(e) => updateBook(book, e.target.value)}>
@@ -39,6 +43,7 @@ class Book extends Component {
               ))
             :''}
           </div>
+          { book.averageRating ?  <div className="book-rating"> Rating: <ReactStars count={5} value={book.averageRating} edit={false} size={8} color2={'#ffd700'} /></div> : '' }
         </div>
       </li>
 

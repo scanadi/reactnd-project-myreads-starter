@@ -10,30 +10,44 @@ class BooksApp extends React.Component {
   state = {
     books: [],
     searchResults: [],
-    query: ''
+    query: '',
+    loader: false
+  }
+  // Function for Loader
+  loader (state) {
+    this.setState({ loader: state });
   }
 
+  //  Add Books to state from API
   componentDidMount (){
+    this.loader(true)
     BooksApi.getAll().then((data) => {
       this.setState({ books : data})
+      this.loader(false)
     })
   }
 
+  // Function for input query and rendering search results
   updateQuery = (query) => {
     if (!query) {
       this.setState({query: '', searchResults: []})
+      this.loader(false)
     } else {
-      this.setState({ query: query.trim() })
+      this.loader(true)
+      this.setState({ query: query })
       BooksApi.search(query).then((books) => {
         if (books.error) {
           books = []
+          this.loader(false)
         }
         books.map(book => (this.state.books.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
         this.setState({ searchResults : books})
+        this.loader(false)
       })
     }
   }
 
+  // Update book shelf onChange of the select
   updateBook = (book, shelf) => {
     BooksApi.update(book,shelf)
     this.setState(state => ({
@@ -43,8 +57,18 @@ class BooksApp extends React.Component {
   }
 
   render() {
+
+    const {loader} = this.state
+
     return (
       <div className="app">
+        {loader ?
+          <div key="loader" className="loader">
+            <span className="loader-text">
+              Stacking books ...
+            </span>
+          </div>
+        : ''}
         <Route exact path='/' render={ () => (
           <ListBooks
             books={this.state.books}
@@ -55,12 +79,12 @@ class BooksApp extends React.Component {
         <Route path='/search' render={ () => (
           <SearchBooks
             books={this.state.books}
+            query={this.state.query}
             searchResults={this.state.searchResults}
             updateBook={this.updateBook}
             updateQuery={this.updateQuery}
           />
         )}/>
-
       </div>
     )
   }

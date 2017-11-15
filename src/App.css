@@ -41,7 +41,7 @@ body, .app {
 }
 .bookshelf-label {
   position: absolute;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
   background: white;
   padding: 0.25rem 0.5rem;
   border-radius: 0 0.25rem 0.25rem 0;
@@ -50,7 +50,18 @@ body, .app {
   color: darkgreen;
   font-weight: lighter;
   border: 1px #eaeaea solid;
+  box-shadow: 1px 1px 5px #00000026;
 }
+.book-rating {
+  margin: 0.25rem 0;
+  font-size: 0.3em;
+  display: flex;
+  align-items: center;
+}
+.book-rating > div {
+  margin-left: 0.25rem
+}
+
 .bookshelf-books {
   text-align: center;
 }
@@ -72,6 +83,27 @@ body, .app {
   background-size: 28px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color:silver;
+  background: url('icons/loader.svg') no-repeat center center;
+  background-size: 64px;
+}
+
+.loader .loader-text {
+  margin-top: -7rem;
+  background-color: white;
 }
 
 /* search page */

@@ -38,11 +38,13 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
+            {/* Map trough the shelf names array and list books per shelf  */}
             {bookShelfs.map( (shelf, i) => (
               <div key={`shelf-${shelf}`} className="bookshelf">
                 <h2 className="bookshelf-title">{titleCase(shelf)}</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
+                    {/* Sort book by title and map trough array listing the books per shelf */}
                     {books.sort(sortBy('title')).map( (book, i ) => (
                       book.shelf === shelf ?
                         <Book
@@ -52,6 +54,7 @@ class ListBooks extends Component {
                           isSearch={false}
                         /> : ''
                     ))}
+
                   </ol>
                 </div>
               </div>

@@ -13,16 +13,22 @@ class SearchBooks extends Component {
     updateQuery: PropTypes.func.isRequired
   }
 
+  moveCaretAtEnd(e) {
+    var temp_value = e.target.value
+    e.target.value = ''
+    e.target.value = temp_value
+  }
+
   render(){
 
-    const {updateBook, updateQuery, searchResults} = this.props
+    const {updateBook, updateQuery, searchResults, query} = this.props
 
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link className='close-search' to='/'>Close</Link>
           <div className="search-books-input-wrapper">
-            <input type="text" onChange={(event) => updateQuery(event.target.value)} placeholder="Search by title or author"/>
+            <input autoFocus onFocus={this.moveCaretAtEnd} value={query} type="text" onChange={(event) => updateQuery(event.target.value)} placeholder="Search by title or author"/>
           </div>
         </div>
         <div className="search-books-results">
@@ -36,6 +42,9 @@ class SearchBooks extends Component {
                 />
             ))}
           </ol>
+          <div className="error-text">
+
+          </div>
         </div>
       </div>
     )
