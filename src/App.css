@@ -39,6 +39,18 @@ body, .app {
 .bookshelf-title {
   border-bottom: 1px solid #dedede;
 }
+.bookshelf-label {
+  position: absolute;
+  font-size: 0.5rem;
+  background: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0 0.25rem 0.25rem 0;
+  margin: 0.25rem 0;
+  bottom: 0;
+  color: darkgreen;
+  font-weight: lighter;
+  border: 1px #eaeaea solid;
+}
 .bookshelf-books {
   text-align: center;
 }
@@ -122,15 +134,29 @@ body, .app {
 .book {
   width: 140px;
 }
-.book-title,
-.book-authors {
-  font-size: 0.8em;
-}
+
 .book-title {
-  margin-top: 10px;
+  margin-top: 0.875em;
+  font-size: 0.875em;
+  padding: 0 0 0.5rem 0;
+}
+.book-subtitle {
+  font-size: 0.7em;
+  color: #666;
+  padding: 0 0 0.5rem 0;
 }
 .book-authors {
+  font-size: 0.3em;
   color: #999;
+  display: block;
+}
+.book-shelf {
+  color: red;
+  padding: 10px 0
+}
+.book-author {
+
+  display: block;
 }
 
 .book-top {
